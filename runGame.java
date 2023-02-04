@@ -84,7 +84,7 @@ class Room {
     private String description; 
     private HashMap <String, Room> jumpList; // move ___, go ____, walk ____, run _____
     private HashMap <String, Integer> specialInstructions; // Action + Interactable --> mode number
-
+    
     public Room (String description, Interactables[] interactables, HashMap <String, Room> jumpList, HashMap <String, Integer> specialInstructions){
         this.interactables = interactables;
         this.description = description;
@@ -144,11 +144,6 @@ class Room {
     }
 }
 
-//Creating Rooms
-Room roomTest1;
-Room roomTest2;
-Room roomTest3;
-
 Room currentRoom;
 ArrayList<Interactables> inventory;
 
@@ -156,6 +151,16 @@ ArrayList<Interactables> inventory;
 String getResponse(String input){
     //Clean Input
     input = input.toLowerCase();
+    
+    if(input.equals("inventory")){
+        if(inventory.size() == 0) return "Your inventory is empty.";
+        String inventoryString = inventory.get(0).getName();
+        
+        for(int i = 1; i < inventory.size(); i++){
+            inventoryString += ", " + inventory.get(i).getName();
+        }
+        return inventoryString;
+    }
     
     //Check for Jumps
     Room jumpTo = currentRoom.checkJumps(input);
@@ -237,41 +242,23 @@ int scrollDiff = 0;
 void settings(){
   size(1200, 800);
 }
+
+//Creating Rooms
+Room roomTest1;
+
 void setup(){
+  
+  //Initialize rooms
   String description1 = "Test 1 Description";
-  Interactables[] interactables1 = new Interactables[0];
-  HashMap<String, Integer> specials1 = new HashMap<>();
+  Interactables[] interactables1 = new Interactables[1];
+  interactables1[0] = new Interactables("interactable name", "look string", "use string", true); //Boolean determines if it can be added to inventory
+  HashMap<String, Integer> specials1 = new HashMap<>(); 
   roomTest1 = new Room(description1, interactables1, null, specials1);
   
-  String description2 = "Test 2 Description";
-  Interactables[] interactables2 = new Interactables[3];
-  interactables2[0] = new Interactables("2a", "2a look", "2a use", true);
-  interactables2[1] = new Interactables("2b", "2b look", "2b use", false);
-  interactables2[2] = new Interactables("2c", "2c look", "2c use", false);
-  HashMap<String, Integer> specials2 = new HashMap<>();
-  
-  roomTest2 = new Room(description2, interactables2, null, specials2);
-  
-  String description3 = "Test 3 Description";
-  Interactables[] interactables3 = new Interactables[3];
-  interactables3[0] = new Interactables("3a", "3a look", "3a use", false);
-  interactables3[1] = new Interactables("3b", "3b look", "3b use", false);
-  interactables3[2] = new Interactables("3c", "3c look", "3c use", false);
-  HashMap<String, Integer> specials3 = new HashMap<>();
-  
-  roomTest3 = new Room(description3, interactables3, null, specials3);
-  
+  //Jumplists
   HashMap<String, Room> jumpList1 = new HashMap<>();
-  jumpList1.put("jump 1 to 2", roomTest2);
-  jumpList1.put("jump 1 to 3", roomTest3);
+  jumpList1.put("jump 1 to 2", roomTest1);
   roomTest1.setJumpList(jumpList1);
-  
-  HashMap<String, Room> jumpList2 = new HashMap<>();
-  jumpList2.put("jump 2 to 3", roomTest3);
-  roomTest2.setJumpList(jumpList2);
-  
-  HashMap<String, Room> jumpList3 = new HashMap<>();
-  roomTest3.setJumpList(jumpList3);
   
   frameRate(45);
   line = new CommandLine();
@@ -279,11 +266,11 @@ void setup(){
   currentRoom = roomTest1;
   inventory = new ArrayList<>();
   
-  String[] fontList = PFont.list();
+  //String[] fontList = PFont.list();
   //printArray(fontList);
   //for(int i = 0; i < 500; i++) //println(fontList[i]);
   
-  PFont monoStandard = createFont("CourierNewPSMT", 44);
+  PFont monoStandard = createFont("Courier New", 44);
   textFont(monoStandard);
   
   textAlign(LEFT, TOP);
@@ -291,13 +278,13 @@ void setup(){
 
 static class Graphics
 {
-  static int typelineX = 60;
-  static int typelineY = 600;
+  static int typelineX = 30;
+  static int typelineY = 720;
   
   static int charX = 24;
   static int charY = 45;
   
-  static int wrapCount = 56;
+  static int wrapCount = 45;
 }
 
 void draw()
@@ -678,7 +665,7 @@ String runGame(String s){
 
 void keyPressed()
 {
-  //println("keycode " + key + " " + keyCode + " " + (key == CODED));
+  println("keycode " + key + " " + keyCode + " " + (key == CODED));
   if(keyCode == 16) {
     //line.newLine("textytextytexty", false);
     line.assignJob(new PrintJob("According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyways, because humans don't care what humans think are impossible."));
