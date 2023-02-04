@@ -240,7 +240,7 @@ PFont monoStandard;
 int scrollDiff = 0;
 
 void settings(){
-  size(1200, 800);
+  size(1600, 1000);
 }
 
 //Creating Rooms
@@ -266,7 +266,7 @@ void setup(){
   currentRoom = roomTest1;
   inventory = new ArrayList<>();
   
-  //String[] fontList = PFont.list();
+  String[] fontList = PFont.list();
   //printArray(fontList);
   //for(int i = 0; i < 500; i++) //println(fontList[i]);
   
@@ -275,16 +275,19 @@ void setup(){
   
   textAlign(LEFT, TOP);
 }
-
 static class Graphics
 {
-  static int typelineX = 30;
-  static int typelineY = 720;
+  static int typelineX = 60;
+  static int typelineY = 900;
   
-  static int charX = 24;
-  static int charY = 45;
+  //60 - 900 - 40 - 24 - 45 - 56
   
-  static int wrapCount = 45;
+  static int textSize = 25; 
+  
+  static float charX = 15.07;
+  static int charY = 28;
+  
+  static int wrapCount = 88;
 }
 
 void draw()
@@ -303,7 +306,7 @@ class TextLine
   public void tlDraw(int x, int y)
   {
     fill(r, g, b);
-    textSize(40);
+    textSize(Graphics.textSize);
     sText(txt, x, y);
   }
   
@@ -337,12 +340,12 @@ class PrintJob implements Jobable
   public PrintJob(String in)
   {
      typeTime = in.length() * (1.0/32.0);
-     totalTime = typeTime + 0.5;
+     totalTime = typeTime + 0.75;
      text = in;
      marked = new int[in.length()];
      setupDone = false;
      
-     //println("totTime " + totalTime);
+     println("totTime " + totalTime);
   }
   
   boolean doSetup()
@@ -399,6 +402,7 @@ class PrintJob implements Jobable
 
 class CommandJob implements Jobable
 {
+  float startTime = 0.3;
   float typeTime = 2;
   float totalTime = 2.5;
   boolean setupDone = false;
@@ -412,8 +416,9 @@ class CommandJob implements Jobable
   
   public CommandJob(String in, int directoryLen)
   {
-     typeTime = (in.length() - directoryLen) * (1.0/20.0);
-     totalTime = typeTime + 0.1;
+     startTime = 0.3;
+     typeTime = (in.length() - directoryLen) * (1.0/20.0) + startTime;
+     totalTime = typeTime + 0.6;
      
      text = in;
      directory = in.substring(0, directoryLen); 
@@ -426,7 +431,7 @@ class CommandJob implements Jobable
      }
      setupDone = false;
      
-     //println("totTime " + totalTime);
+     println("totTime " + totalTime);
   }
   
   boolean doSetup()
@@ -438,7 +443,9 @@ class CommandJob implements Jobable
   void giveTime(float curTime)
   {
     recentTime = curTime;
-    float prog = (curTime + 0.01) / typeTime; 
+    float prog = (curTime + 0.01 - startTime) / typeTime; 
+    
+    if(prog < 0) return;
     
     int index = floor(prog * (text.length() - directory.length())) + directory.length();
     for(int i = index; i >= directory.length(); i--)
@@ -472,7 +479,8 @@ class CommandJob implements Jobable
   
   boolean isPlayerActive()
   {
-    return recentTime >= totalTime;
+    return true;
+    //return recentTime >= totalTime;
   }
   boolean hasTerminated()
   {
@@ -523,7 +531,10 @@ class CommandLine
     cursorTime += 1.0/30.0;
     background(0);
     
-    textSize(40);
+    textSize(Graphics.textSize);
+    
+    //fill(255);
+    //text("wefdgdsgv", 100, 100);
     
     if(playerActive)
     {
@@ -541,7 +552,7 @@ class CommandLine
     
     for(int i = 0; i < prevLines.size(); i++)
     {
-      int y = Graphics.typelineY - (i + 1) * 46;
+      int y = Graphics.typelineY - (i + 1) * (Graphics.charY + 2);
       int x = Graphics.typelineX;
       prevLines.get(i).tlDraw(x, y);
     }
@@ -681,6 +692,7 @@ void keyPressed()
 
 public void sText(String txt, int x, int y)
 {
+  //println("atta " + txt + " " + scrollDiff);
   text(txt, x, y - scrollDiff); 
 }
 void mouseWheel(MouseEvent event) {
