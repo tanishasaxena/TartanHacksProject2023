@@ -218,8 +218,14 @@ String getResponse(String input){
         println(action + interactable);
         int mode = currentRoom.getInstructionMode(action + interactable);
         //println("interactable:" + interactable);
-        if(action.equals("use") || action.equals("look")) return currentRoom.runInstruction(action, interactable, mode);
-        else {
+        if(action.equals("use") || action.equals("look")){
+            if(currentRoom.isInteractable("id") && interactable.equals("id") && action.equals("use")){
+                if(currentRoom != floor7A) return "There is nothing to use your ID on right now!";
+                onKeyPad = true;
+                return currentRoom.getInteractable("id").runInstruction(action, 0);
+            }
+            return currentRoom.runInstruction(action, interactable, mode);
+        } else {
             Interactables current = currentRoom.getInteractable(interactable);
             if(inventory.contains(current)) return "You already have this in your inventory!";
             else {
@@ -241,6 +247,7 @@ String getResponse(String input){
                 if(i.getName().equals(interactable)) {println(i.getName() + " " + interactable);current = i;}
             //println("Using inventory");
             if(current.getName().equals("id") && action.equals("use")){
+                if(currentRoom != floor7A) return "There is nothing to use this ID on right now!";
                 onKeyPad = true;
                 return current.runInstruction(action, 0);
             }
@@ -266,6 +273,8 @@ void settings(){
 
 //Creating Rooms
 Room dummy;
+Room tutorial;
+
 Room floor9; //mirror
 
 Room floor8A; //forward
@@ -302,10 +311,19 @@ void init_vars(){//Initialize rooms
   String nolook = "You cannot look at this item.";
   String noUse = "You cannot use this item.";
 
+  //DUMMY
   String descriptionD = "";
   Interactables[] interactablesD = new Interactables[0];
   HashMap<String, Integer> specialsD = new HashMap<>(); 
   dummy = new Room(descriptionD, interactablesD, null, specialsD);
+  
+  //TUTORIAL
+  String detailsT = "You are sitting at a square desk. In front of you, there is a <laptop>. You can inspect, use, or grab the item. You can access your inventory by using 'inventory'. Feel free to explore these commands! Type 'begin' once you are done. You may also go forward, backward, left, or right in some rooms";
+  Interactables[] interactablesT = new Interactables[1];
+  String computerLook = "It's a Scotty laptop, the newest model in fact. On the front, it has an engraving of a scottish terrier.";
+  String computerUse = "You open the laptop, and the screen turns on. You try logging in to the laptop, but the password is incorrect.";
+  interactablesT[0] = new Interactables("laptop", computerLook, computerUse, true);
+  tutorial = new Room(detailsT, interactablesT, null, empty);
   
   //FLOOR 9
   String details9 = "You enter a sterile white room. There is a <mirror> on the wall.";
@@ -523,8 +541,12 @@ void init_vars(){//Initialize rooms
   floor1.setJumpList(jFloor1);
   
   HashMap<String, Room> jDummy = new HashMap<>();
-  jDummy.put("start", floor9);
+  jDummy.put("start", tutorial);
   dummy.setJumpList(jDummy);
+  
+  HashMap<String, Room> jTutorial = new HashMap<>();
+  jTutorial.put("begin", floor9);
+  tutorial.setJumpList(jTutorial);
 }
 
 void setup(){
