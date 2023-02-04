@@ -265,7 +265,7 @@ void settings(){
 }
 
 //Creating Rooms
-Room roomTest1;
+Room dummy;
 Room floor9; //mirror
 
 Room floor8A; //forward
@@ -302,11 +302,10 @@ void init_vars(){//Initialize rooms
   String nolook = "You cannot look at this item.";
   String noUse = "You cannot use this item.";
 
-  // String description1 = "Test 1 Description";
-  // Interactables[] interactables1 = new Interactables[1];
-  // interactables1[0] = new Interactables("interactable name", "look string", "use string", true); //Boolean determines if it can be added to inventory
-  // HashMap<String, Integer> specials1 = new HashMap<>(); 
-  // roomTest1 = new Room(description1, interactables1, null, specials1);
+  String descriptionD = "";
+  Interactables[] interactablesD = new Interactables[0];
+  HashMap<String, Integer> specialsD = new HashMap<>(); 
+  dummy = new Room(descriptionD, interactablesD, null, specialsD);
   
   //FLOOR 9
   String details9 = "You enter a sterile white room. There is a <mirror> on the wall.";
@@ -522,6 +521,10 @@ void init_vars(){//Initialize rooms
   
   HashMap<String, Room> jFloor1 = new HashMap<>();
   floor1.setJumpList(jFloor1);
+  
+  HashMap<String, Room> jDummy = new HashMap<>();
+  jDummy.put("start", floor9);
+  dummy.setJumpList(jDummy);
 }
 
 void setup(){
@@ -531,7 +534,7 @@ void setup(){
   frameRate(45);
   line = new CommandLine();
   
-  currentRoom = floor9;
+  currentRoom = dummy;
   inventory = new ArrayList<>();
   
   String[] fontList = PFont.list();
@@ -547,7 +550,7 @@ void setup(){
 static class Graphics
 {
   static int typelineX = 60;
-  static int typelineY = 600;
+  static int typelineY = 750;
   
   //60 - 900 - 40 - 24 - 45 - 56
   
@@ -941,28 +944,37 @@ class CommandLine
   
   public void startUpScript()
   {
-    //assignJob(new PrintJob("Initializing Extraction", 16, 0.3, true));
+    assignJob(new PrintJob("Initializing Extraction", 16, 0.3, true));
     
-    //assignJob(new PrintJob("...", 1.8, 0.3, false));
-    //assignJob(new PrintJob("...", 1.8, 0.6, false));
+    assignJob(new PrintJob("...", 1.8, 0.3, false));
+    assignJob(new PrintJob("...", 1.8, 0.6, false));
 
-    //assignJob(new PrintJob(" ", 16, 1.0, true));
+    assignJob(new PrintJob(" ", 16, 1.0, true));
+    //getResponse("start");
+    float speed = 10;
+    float timeDel = 0.5;
+    for(int i = 0; i < 18; i++)
+    {
+      String msg = (i == 0) ? "Error terminating BREAKOUT.exe" : "Reattempting to terminate BREAKOUT.exe";
+      assignJob(new PrintJob(msg, speed, timeDel, true));
+      speed = 1.4 * speed;
+      if(i <= 18) timeDel = 0.8 * timeDel;
+    }
     
-    //float speed = 10;
-    //float timeDel = 0.5;
-    //for(int i = 0; i < 18; i++)
-    //{
-    //  String msg = (i == 0) ? "Error terminating BREAKOUT.exe" : "Reattempting to terminate BREAKOUT.exe";
-    //  assignJob(new PrintJob(msg, speed, timeDel, true));
-    //  speed = 1.4 * speed;
-    //  if(i <= 18) timeDel = 0.8 * timeDel;
-    //}
-    
-    //assignJob(new PrintJob("Running cleanTrace.exe", speed, 1, true));
-    //assignJob(new JanitorJob());
+    assignJob(new PrintJob("Running cleanTrace.exe", speed, 1, true));
+    assignJob(new JanitorJob());
     
     //assignJob(new PrintJob("You enter a sterile white room. There's a mirror on the wall.", 32, 1, true));
     //assignJob(new PrintJob("...", 45, 1.5, true));
+    
+    String response = getResponse("start");
+    
+    String[] parsedResp = response.split("\n");
+    
+    for(int i = 0; i < parsedResp.length; i++)
+    {
+      line.assignJob(new PrintJob(parsedResp[i])); 
+    }
 
   }
     
