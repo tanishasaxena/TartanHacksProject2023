@@ -358,7 +358,7 @@ void init_vars(){//Initialize rooms
   //FLOOR 8D
   String details8D = "You exit the room. Right outside the door, you nearly trip on a bottle of <Mountain Dew> on the ground. You look around, but there is no one to be seen. There is a hallway to your right that you have not yet explored. ";
   Interactables[] interactables8D = new Interactables[1];
-  String dewGrab = "You put the Mountain Dew into your backpack.";
+  String dewGrab = "You dip your finger in the mountain dew. With the tenderness of a cow, you let the mouse lick your finger. Its eyes go green. The mouse runs off to the left.";
   interactables8D[0] = new Interactables("mountain dew", nolook, dewGrab, true);
   floor8D = new Room(details8D, interactables8D, null, empty);
 
@@ -368,7 +368,7 @@ void init_vars(){//Initialize rooms
   floor8E = new Room(details8E, interactables8E, null, empty);
   
   //FLOOR 7
-  String details7A = "The stairs have a smooth railing on both sides all the way down, and you slide down the railing to the bottom of the stairs. \n \n Floor 7 \n \n You turn around, but the stairs you just came down seem to have disappeared. In front of you, there are two round tables, each with 4 chairs. On the left, there’s a trash can next to a door.";
+  String details7A = "The stairs have a smooth railing on both sides all the way down, and you slide down the railing to the bottom of the stairs. \n \n Floor 7 \n \n You turn around, but the stairs you just came down seem to have disappeared. In front of you, there are two round tables, each with 4 chairs. On the left, there’s a <trash> can next to a door.";
   Interactables[] interactables7A = new Interactables[3];
   String trashDesc = "";
   String doorDesc = "It's just a door. It's looking awfully locked.";
