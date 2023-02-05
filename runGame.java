@@ -326,14 +326,14 @@ void init_vars(){//Initialize rooms
   tutorial = new Room(detailsT, interactablesT, null, empty);
   
   //FLOOR 9
-  String details9 = "You enter a sterile white room. There is a <mirror> on the wall.";
+  String details9 = "\n\n Floor 9 \n\n You enter a sterile white room. There is a <mirror> on the wall.";
   Interactables[] interactables9 = new Interactables[1];
   String mirrorLook = "You see yourself in the reflection. When you put your finger to the mirror there is a small gap between your fingertip and the reflection.";
   interactables9[0] = new Interactables("mirror", mirrorLook, noUse, false);
   floor9 = new Room(details9, interactables9, null, empty);
   
   //FLOOR 8A
-  String details8A = "You pry the edge of the mirror off the wall. The frame dislodges but the mirror stays put tight. With all the effort, you almost do not notice that your thumb has slipped through the mirror. You walk through the mirror into another room. You are in a long corridor with a series of wooden doors to your left. It’s completely silent, save for the faint buzz of the white fluorescent lights on the ceiling.";
+  String details8A = "You pry the edge of the mirror off the wall. The frame dislodges but the mirror stays put tight. With all the effort, you almost do not notice that your thumb has slipped through the mirror. You walk through the mirror into another room. \n\n Floor 8 \n\n You are in a long corridor with a series of wooden doors to your left. It’s completely silent, save for the faint buzz of the white fluorescent lights on the ceiling.";
   Interactables[] interactables8A = new Interactables[0];
   floor8A = new Room(details8A, interactables8A, null, empty);
 
@@ -388,14 +388,14 @@ void init_vars(){//Initialize rooms
   floor7B = new Room(details7B, interactables7B, null, empty);
 
   //FLOOR 6
-  String details6 = "You jump onto and the machine whirs on. Caramelldansen starts playing and the arrow tiles flash across the screen as you struggle to keep up. The lack of exercise is really catching up to you. Even so, you breathe a sigh of relief as the song comes to a close. Although you scored far from perfect, your non-existent opponent did far worse. Just as this thought crosses your mind, the room darkens and an electric blue light flashes across the room. \n You find yourself lying on an orange couch. It’s not particularly comfortable, but it’s a welcome surprise after such a long adventure. Unfortunately for you, you’re less than halfway through. You roll over on your side and see some more orange couches and a large potted <plant> in the corner.";
+  String details6 = "You jump onto and the machine whirs on. Caramelldansen starts playing and the arrow tiles flash across the screen as you struggle to keep up. The lack of exercise is really catching up to you. Even so, you breathe a sigh of relief as the song comes to a close. Although you scored far from perfect, your non-existent opponent did far worse. Just as this thought crosses your mind, the room darkens and an electric blue light flashes across the room. \n\n Floor 6 \n\n You find yourself lying on an orange couch. It’s not particularly comfortable, but it’s a welcome surprise after such a long adventure. Unfortunately for you, you’re less than halfway through. You roll over on your side and see some more orange couches and a large potted <plant> in the corner.";
   Interactables[] interactables6 = new Interactables[1];
   String plantLook = "The plant has large, waxy leaves that shift different shades of dark green depending on the angle the light hits them. The plant is potted in a dark brown ceramic that looks a bit dusty on the outside.";
   interactables6[0] = new Interactables("plant", plantLook, noUse, false);
   floor6 = new Room(details6, interactables6, null, empty);
 
   //FLOOR 5A 
-  String details5A = "You pick up the plant. It feels incredibly heavy, but that’s because you’re weak. You drag the plant to the center of the room. You summon all the strength in your legs and manage to lift the plant to chest level before smashing it onto the ground. The ground cracks, and you fall through. \n You come to awareness standing next to a blocked off stairwell. On your right, there’s a ledge with a small plant that has “Hope” written on the pot. The plant does not appear to be in the best condition. The leaves are browning and beginning to fall off. The dirt is extremely dry. Luckily, there is a small <bottle> of water nearby to water the plant.";
+  String details5A = "You pick up the plant. It feels incredibly heavy, but that’s because you’re weak. You drag the plant to the center of the room. You summon all the strength in your legs and manage to lift the plant to chest level before smashing it onto the ground. The ground cracks, and you fall through. \n\n Floor 5 \n\n You come to awareness standing next to a blocked off stairwell. On your right, there’s a ledge with a small plant that has “Hope” written on the pot. The plant does not appear to be in the best condition. The leaves are browning and beginning to fall off. The dirt is extremely dry. Luckily, there is a small <bottle> of water nearby to water the plant.";
   Interactables[] interactables5A = new Interactables[1];
   String bottleUse = "You unscrew the cap of the bottle and pour a bit of water into the pot. The plant seems to look a bit better. Nice job, you’ve partially atoned for your sin of previously killing an innocent plant. Only partially though.";
   interactables5A[0] = new Interactables("bottle", nolook, bottleUse, false);
@@ -416,7 +416,7 @@ void init_vars(){//Initialize rooms
   floor5C = new Room(details5C, interactables5C, null, empty);
 
   //FLOOR 4
-  String details4 = "You speed down the helix in your rolling chair and see an opening to get off at a different floor. The chair is quickly picking up speed but you decide to jump off at the opening. \n You tumble out of the chair and onto the floor. Your knee hurts a bit, so you roll up your pant leg to expose it. The injury isn’t bleeding, so it’s probably just a bruise. That doesn’t mean it hurts any less though. As you’re inspecting your injury, a person approaches from behind. \n 'What are you doing here?' \n ... \n 'I see, you’re on an adventure and perhaps I can be of some help. Here’s a hint for the next stage.' \n Professor Wackey leads you to a new area and offers you a yellow post-it note with a <recipe> scribbled on it.";  
+  String details4 = "You speed down the helix in your rolling chair and see an opening to get off at a different floor. The chair is quickly picking up speed but you decide to jump off at the opening. \n\n Floor 4 \n\n You tumble out of the chair and onto the floor. Your knee hurts a bit, so you roll up your pant leg to expose it. The injury isn’t bleeding, so it’s probably just a bruise. That doesn’t mean it hurts any less though. As you’re inspecting your injury, a person approaches from behind. \n 'What are you doing here?' \n ... \n 'I see, you’re on an adventure and perhaps I can be of some help. Here’s a hint for the next stage.' \n Professor Wackey leads you to a new area and offers you a yellow post-it note with a <recipe> scribbled on it.";  
   Interactables[] interactables4 = new Interactables[0];
   floor4 = new Room(details4, interactables4, null, empty);
 
@@ -446,7 +446,7 @@ void init_vars(){//Initialize rooms
   floor2C = new Room(details2C, interactables2C, null, empty);
   
   //FLOOR 1
-  String details1 = "You press the down button on the elevator. The light turns on, but nothing happens. \n . \n . \n. After ten torturous minutes, the elevator arrives. The doors ding as they close behind you. At long last, you reach the 1st floor. \n Floor 1 \n You enter a dusty tan room. There is nothing behind you. There is s a <shower> in the corner, a spider web is stuck to its shower head.";
+  String details1 = "You press the down button on the elevator. The light turns on, but nothing happens. \n . \n . \n. After ten torturous minutes, the elevator arrives. The doors ding as they close behind you. At long last, you reach the 1st floor. \n\n Floor 1 \n\n You enter a dusty tan room. There is nothing behind you. There is s a <shower> in the corner, a spider web is stuck to its shower head.";
   Interactables[] interactables1 = new Interactables[1];
 
   String showerDesc = "The walls of the <shower> are wet. The spider is struggling to hang on with its thread.";
@@ -507,6 +507,7 @@ void init_vars(){//Initialize rooms
 
   HashMap<String, Room> jFloor5C = new HashMap<>();
   jFloor5C.put("use chair", floor4);
+  jFloor5C.put("use helix", floor4);
   floor5C.setJumpList(jFloor5C);
 
   HashMap<String, Room> jFloor4 = new HashMap<>();
@@ -563,7 +564,7 @@ void setup(){
   //printArray(fontList);
   //for(int i = 0; i < 500; i++) //println(fontList[i]);
   
-  PFont monoStandard = createFont("CourierNewPSMT", 44);
+  PFont monoStandard = createFont("Courier New", 44);
   textFont(monoStandard);
   
   textAlign(LEFT, TOP);
